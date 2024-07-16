@@ -1,0 +1,90 @@
+body {
+    background: #f9e933;
+    margin : auto;
+}
+
+main {
+    background: white;
+    margin : auto;
+    overflow: auto;
+}
+
+main .content {
+    background: #eee;
+    padding: 10px;
+}
+
+main .content li {
+    padding:5px;
+    background-color: rgb(208, 237, 248);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+header {
+    background: white;
+    overflow: auto;
+}
+
+header, main, footer {
+    min-width: 855px;
+}
+
+header .container, main .container, footer .container {
+    max-width: 855px;
+    margin: auto;
+}
+
+header .container {
+    border-bottom: 1px solid #eee;
+    padding-top: 30px;
+    padding-bottom: 70px;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 50px;
+    font-style: italic;
+    float: left;
+    width: 570px;
+    color: red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+header nav {
+    float: right;
+    width: 285px;
+}
+
+header nav a {
+    color: red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+}
+
+.contact {
+    float: left;
+    width: 425px;
+}
+
+.sitemap {
+    float: right;
+    width: 425px;
+}
+
+.tabs a span {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    background: #ddd;
+    padding: 5px;
+    margin-right: 10px;
+    color: red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.tabs a span.active {
+    background: #eee;
+}
