@@ -52,10 +52,10 @@ var main = function() {
                     $newUl.append($("<li>").text(todos[i]));                    
                 }
 
-                // $.post("todos", {}, function(response) {
-                //     console.log("We posted and the server responded!");
-                //     console.log(response);
-                // });
+                $.post("todos", {}, function(response) {
+                    console.log("We posted and the server responded!");
+                    console.log(response);
+                });
 
                 $("main .content").append($newUl);
             }
