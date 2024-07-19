@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const PORT  = process.env.PORT || 4000;
 
+app.listen(PORT, () => console.log('Server running on port ' + PORT));
+
 app.post("/todos", function (req, res) {
     console.log("data has been posted to the server!");
     res.json({"message":"You posted to the server!"});
@@ -18,5 +20,3 @@ app.get("/goodbye", function(req, res) {
 app.get("todos.json", function(req, res) {
     res.json(toDos);
 })
-
-app.listen(PORT, () => console.log('Server running on port ' + PORT));
