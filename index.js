@@ -9,6 +9,10 @@ app.post("/todos", function (req, res) {
     res.json({"message":"You posted to the server!"});
 });
 
+app.get('/', function(req,res) {
+    res.sendFile('public/index.html');
+});
+
 app.get("/hello", function(req, res) {
     res.send("Hello World!");
 });
