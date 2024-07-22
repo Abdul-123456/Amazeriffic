@@ -4,6 +4,12 @@ const PORT  = process.env.PORT || 4000;
 
 app.listen(PORT, () => console.log('Server running on port ' + PORT));
 
+app.use(express.static(__dirname));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.post("/todos", function (req, res) {
     console.log("data has been posted to the server!");
     res.json({"message":"You posted to the server!"});
