@@ -1,36 +1,23 @@
 <!doctype html>
 <html>
     <head>
+        <link href="stylesheets/auth.css" rel="stylesheet" type="text/css">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <title>Sign Up Amazeriffic</title>
     </head>
     <body>
-        <nav></nav>
-        <div class="container mt-4">
-            <div class="card" style="width: 18rem;">            
-                <div class="card-header">Register Form</div>    
-                <div class="card-body">
-                    <form action="/auth/register" method="POST">
-                        <div class="mb-3">
-                            <label for="name-reg" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name-reg" name="name">                        
-                        </div>
-                        <div class="mb-3">
-                            <label for="email-reg" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email-reg" name="email">                        
-                        </div>
-                        <div class="mb-3">
-                            <label for="password-reg" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password-reg" name="password">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password-conf-reg" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="password-conf-reg" name="password_confirm">
-                        </div>
-        
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
+        <div class="card-body">
+            <h1>Sign Up to Get Started</h1>
+            <div class="header2">Already have an account? <a class ="signLink" href="login.html">Login</a></div>
+            <form action="/auth/register" method="POST">
+                <label for="email-reg" class="form-label">Email</label><br>
+                <input type="text" class="form-control" id="email-reg" name="email" autofocus><br>
+                <label for="password-reg" class="form-label">Password</label><br>
+                <input type="password" class="form-control" id="password-reg" name="password"><br>
+                <label for="confirm-password" class="form-label">Confirm Password</label><br>
+                <input type="password" class="form-control" id="confirm-password" name="password"><br>
+                <button type="submit" class="btn"><b>Sign Up</b></button>
+            </form>
         </div>
     </body>
 </html>

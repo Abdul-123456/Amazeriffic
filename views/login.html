@@ -1,28 +1,21 @@
 <!doctype html>
 <html>
     <head>
+        <link href="stylesheets/auth.css" rel="stylesheet" type="text/css">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <title>Login Amazeriffic</title>
     </head>
     <body>
-        <nav></nav>
-        <div class="container mt-4">
-            <div class="card" style="width: 18rem;">            
-                <div class="card-header">Register Form</div>    
-                <div class="card-body">
-                    <form action="/auth/login" method="POST">
-                        <div class="mb-3">
-                            <label for="email-reg" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email-reg" name="email">                        
-                        </div>
-                        <div class="mb-3">
-                            <label for="password-reg" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password-reg" name="password">
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
+        <div class="card-body">
+            <h1>Login to Get Started</h1>
+            <div class="header2">Don't have an account? <a class ="signLink" href="register.html">Sign Up</a></div>
+            <form action="/auth/login" method="POST">
+                <label for="email-reg" class="form-label">Email</label><br>
+                <input type="text" class="form-control" id="email-reg" name="email" autofocus><br>
+                <label for="password-reg" class="form-label">Password</label><br>
+                <input type="password" class="form-control" id="password-reg" name="password"><br>
+                <button type="submit" class="btn"><b>Login</b></button>
+            </form>
         </div>
     </body>
 </html>
