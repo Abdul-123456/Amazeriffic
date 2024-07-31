@@ -1,9 +1,40 @@
 body {
-    background: #f9e933;
-    margin : auto;
+    background: rgb(185, 185, 185);
 }
 
-main {
+header {
+    font-family: sans-serif;
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: rgb(124, 124, 124) solid 1px;
+    margin: auto;
+    overflow: auto;
+}
+
+header h1 {
+    font-size: 35px;
+    float: left;
+}
+
+header nav {
+    margin-top: 10px;
+    float: right;
+}
+
+header nav a {
+    margin-right: 50px;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+header nav a:hover {
+    transition-duration: 500ms;
+    color: rgb(128, 124, 124);
+}
+
+/* main {
     background: white;
     margin : auto;
     overflow: auto;
@@ -87,4 +118,4 @@ header nav a {
 
 .tabs a span.active {
     background: #eee;
-}
+} */

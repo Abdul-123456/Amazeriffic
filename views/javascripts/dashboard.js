@@ -1,10 +1,15 @@
-// var redis = require("redis"),
-// client;
-
 var main = function() {
     "use strict";
 
-    //client = redis.createClient();
+    $.get("/user", {}, function(response) {
+        console.log(response);
+        if (response["status"] == "success") {
+
+        }
+        else {
+            location.replace("http://localhost:4000/views/register.html");
+        }
+    });
 
     var todos = [];
     //     "Finish writing this book",

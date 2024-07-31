@@ -96,15 +96,23 @@ app.post("/auth/login", function (req, res) {
 });
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.redirect(path.join(__dirname, 'index.html'));
 });
 
 app.get("/user", Verify, (req, res) => {
-    res.status(200).json({
-        status: "success",
-        message: "Welcome to the your Dashboard!",
-    });
+    // res.status(200).json({
+    //     status: "success",
+    //     message: "Welcome to the your Dashboard!",
+    // });
+    res.json({status: "success", message: req.user});
 });
+
+// app.get("/user", function (req, res) {
+//     //const stats = [];
+//     const stats = loggedIn(req);
+//     console.log(stats[0]);
+//     //res.send(logging[0].toString());
+// });
 
 app.get("/hello", function(req, res) {
     res.send("Hello World!");
@@ -121,13 +129,13 @@ app.get("todos.json", function(req, res) {
 function Verify (req, res, next) {
     const authHeader = req.headers["cookie"];
     if (!authHeader) {
-        return res.json({message: "Please login to perform the action!"});
+        return res.json({status: "failure", message: "Please login to perform the action!"});
     }
     const cookie = authHeader.split("=")[1];
 
     jwt.verify(cookie, process.env.ACCESS_TOKEN, async function (error, decoded) {
         if (error) {
-            return res.json({message: "Please login to perform the action!"});
+            return res.json({status: "failure", message: "Please login to perform the action!"});
         }
 
         db.query("SELECT * FROM users WHERE ID = ?", [decoded.id], async function (error, result) {
@@ -141,3 +149,45 @@ function Verify (req, res, next) {
         });
     });
 }
+
+// function loggedIn(req) {
+//     console.log("HelloStarted");
+//     const arr = [];
+//     const authHeader = req.headers["cookie"];
+//     if (!authHeader) {
+//         console.log("First If Statement");
+//         arr[0] = false;
+//         arr[1] = "";
+//         return arr;
+//         // return [false, ""];
+//     }
+//     else {
+//         const cookie = authHeader.split("=")[1];
+//         jwt.verify(cookie, process.env.ACCESS_TOKEN, async function (error, decoded) {
+//             if (error) {
+//                 arr[0] = false;
+//                 arr[1] = "";
+//                 return arr;
+//                 // return [false, ""];
+//             }
+//             else {
+//                 db.query("SELECT * FROM users WHERE ID = ?", [decoded.id], async function (error, result) {
+//                     if (error) {
+//                         console.log(error);
+//                         arr[0] = false;
+//                         arr[1] = "";
+//                         return arr;
+//                         // return [false, ""];
+//                     }
+//                     else {
+//                         console.log("Hello");
+//                         arr[0] = true;
+//                         arr[1] = false;
+//                         return arr;
+//                         //return [true, result[0]];
+//                     }
+//                 });                
+//             }
+//         });
+//     }
+// }
