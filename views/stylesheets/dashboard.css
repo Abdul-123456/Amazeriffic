@@ -1,5 +1,10 @@
+html {
+    height: 100%;
+}
+
 body {
     background: rgb(185, 185, 185);
+    height: 100%;
 }
 
 header {
@@ -34,6 +39,49 @@ header nav a:hover {
     color: rgb(128, 124, 124);
 }
 
+main {
+    padding: 10px;
+    min-height: 100vh;
+}
+
+.tabs {
+    float: left;
+    width: 12%;
+    min-height: 95vh;
+    padding-top: 45px;
+    padding-left: 4px;
+    /* padding-right: 15px; */
+    border-radius: 10px;
+    background: rgb(163, 163, 163);
+}
+
+.tabs a {
+    width: 89%;
+    margin-bottom: 10px;
+    display: inline-block;
+    padding: 5px;
+    text-decoration: none;
+    font-family: sans-serif;
+    color: black;
+}
+
+.tabs .active {
+    border: 1px solid rgb(151, 151, 151);
+    border-radius: 5px;
+    background: rgb(151, 151, 151);
+}
+
+main .content {
+    float: right;
+    width: 86%;
+    min-height: 95vh;
+    padding-top: 45px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+    background: rgb(163, 163, 163);
+}
+
 /* main {
     background: white;
     margin : auto;
@@ -43,17 +91,32 @@ header nav a:hover {
 main .content {
     background: #eee;
     padding: 10px;
-}
+}*/
 
-main .content li {
-    padding:5px;
-    background-color: rgb(208, 237, 248);
+main .content #task {
+    padding: 10px;
+    background-color: rgb(151, 151, 151);
     border-radius: 5px;
     margin-bottom: 5px;
-    margin-top: 5px;
 }
 
-header {
+main .content #task #delBtn {
+    background: black;
+    color: white;
+    float: right;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+main .content #task #cmpltBtn {
+    font-size: 11px;
+    background: black;
+    color: white;
+    float: right;
+    border-radius: 50%;
+}
+
+/*header {
     background: white;
     overflow: auto;
 }

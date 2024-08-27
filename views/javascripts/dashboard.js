@@ -3,76 +3,133 @@ var main = function() {
 
     $.get("/user", {}, function(response) {
         console.log(response);
-        if (response["status"] == "success") {
-
-        }
+        if (response["status"] == "success") {}
         else {
             location.replace("http://localhost:4000/views/register.html");
         }
     });
 
-    var todos = [];
-    //     "Finish writing this book",
-    //     "Take Gracie to the park",
-    //     "Answer emails",
-    //     "Prep for Monday's class",
-    //     "Make up some new ToDos",
-    //     "Get Groceries"
-    // ];
-    var tags = [];
-
-    var tagObject = [];
-
-    $.getJSON("todos.json", function(todosObject) {
-        todosObject.forEach(function(todo) {
-            var desc = todo.description;
-            todos.push(desc);
-            todo.tags.forEach(function(tag) {
-                var index = tags.indexOf(tag);
-                if (index == -1) {
-                    tags.push(tag);
-                    var arr = []
-                    arr.push(desc);
-                    var obj = {"name" : tag, "toDos" : arr};
-                    tagObject.push(obj);
-                }
-                else {
-                    tagObject[index].toDos.push(desc);
-                }
-            });
-
-        });
+    $(".logout").on("click", () => {
+        $.post("/logout", {});
     });
 
-    $(".tabs a span").toArray().forEach(function(element) {
+    $(".tabs a").toArray().forEach(function(element) {
         $(element).on("click", function() {
-            $(".tabs a span").removeClass("active");
+            $(".tabs a").removeClass("active");
             $(element).addClass("active");
             $("main .content").empty();
 
-            if ($(element).parent().is(":nth-child(1)")) {
-                var $newUl = $("<ul>");
+            if ($(element).is(":nth-child(1)")) {
                 console.log("FIRST TAB CLICKED!");
-                for (var i=todos.length-1; i>=0; i--) {
-                    $newUl.append($("<li>").text(todos[i]));                    
-                }
 
-                $.post("todos", {}, function(response) {
-                    console.log("We posted and the server responded!");
-                    console.log(response);
+                $.get("/tasks", {}, function(response) {
+                    if (response["status"] == "success") {
+                        for (let i=response["message"].length-1; i>=0; i--) {
+                            if (response["message"][i]['completed'] == 1) {
+                                continue;
+                            }
+
+                            var taskDiv = $("<div>");
+                            taskDiv.attr("id", "task");
+                            taskDiv.text(response["message"][i]["taskDesc"]);
+                            
+                            var delBtn = $("<button>");
+                            delBtn.attr("id", "delBtn");
+                            delBtn.attr("title", "Delete Task");
+                            delBtn.append("&#10539;");
+
+                            delBtn.on("click", () => {
+                                $.post("/delTask", {taskId: response["message"][i]["taskID"]}, (res) => {
+                                    console.log(res["status"]);
+                                    if (res['status'] == 'success') {
+                                        $(".newest").trigger("click");
+                                    }
+                                    else {
+
+                                    }
+                                });
+                            });
+
+                            var cmpBtn = $("<button>");
+                            cmpBtn.attr("id", "cmpltBtn");
+                            cmpBtn.attr("title", "Mark Completed");
+                            cmpBtn.append("&#10003;");
+
+                            cmpBtn.on("click", () => {
+                                $.post("/cmpTask", {taskId: response["message"][i]["taskID"]}, (res) => {
+                                    if (res['status'] == 'success') {
+                                        $(".newest").trigger("click");
+                                    }
+                                    else {
+                                        
+                                    }
+                                });
+                            });
+
+                            taskDiv.append(delBtn);
+                            taskDiv.append(cmpBtn);
+
+                            $("main .content").append(taskDiv);
+                        }
+                    }
                 });
-
-                $("main .content").append($newUl);
             }
-            else if ($(element).parent().is(":nth-child(2)")) {
-                var $newUl = $("<ul>");
+            else if ($(element).is(":nth-child(3)")) {
                 console.log("SECOND TAB CLICKED!");
-                todos.forEach(function(todo) {
-                    $newUl.append($("<li>").text(todo));                    
+                
+                $.get("/tasks", {}, function(response) {
+                    if (response["status"] == "success") {
+                        for (let i=0; i<response["message"].length; i++) {
+                            if (response["message"][i]['completed'] == 1) {
+                                continue;
+                            }
+
+                            var taskDiv = $("<div>");
+                            taskDiv.attr("id", "task");
+                            taskDiv.text(response["message"][i]["taskDesc"]);
+                            
+                            var delBtn = $("<button>");
+                            delBtn.attr("id", "delBtn");
+                            delBtn.attr("title", "Delete Task");
+                            delBtn.append("&#10539;");
+
+                            delBtn.on("click", () => {
+                                $.post("/delTask", {taskId: response["message"][i]["taskID"]}, (res) => {
+                                    console.log(res["status"]);
+                                    if (res['status'] == 'success') {
+                                        $(".oldest").trigger("click");
+                                    }
+                                    else {
+
+                                    }
+                                });
+                            });
+
+                            var cmpBtn = $("<button>");
+                            cmpBtn.attr("id", "cmpltBtn");
+                            cmpBtn.attr("title", "Mark Completed");
+                            cmpBtn.append("&#10003;");
+
+                            cmpBtn.on("click", () => {
+                                $.post("/cmpTask", {taskId: response["message"][i]["taskID"]}, (res) => {
+                                    if (res['status'] == 'success') {
+                                        $(".oldest").trigger("click");
+                                    }
+                                    else {
+                                        
+                                    }
+                                });
+                            });
+
+                            taskDiv.append(delBtn);
+                            taskDiv.append(cmpBtn);
+
+                            $("main .content").append(taskDiv);
+                        }
+                    }
                 });
-                $("main .content").append($newUl);
             }
-            else if ($(element).parent().is(":nth-child(3)")) {
+            else if ($(element).is(":nth-child(5)")) {
                 var $input = $("<input>");
                 var $add = $("<p>");
                 $add.text("Add Task:");
@@ -81,30 +138,87 @@ var main = function() {
                 $button.text("+");
 
                 $button.on("click", function() {
-                    todos.push($input.val());
+                    let taskInput = $input.val();
+                    
+                    $.post("/addTask", {task: taskInput}, (response) => {
+                        if (response['status'] == 'success') {}
+                        else {
+                            location.replace("http://localhost:4000/views/register.html") 
+                        }
+                    });
+                    
                     $input.val("");
                 });
 
                 $("main .content").append($add).append($input).append($button);
             }
-            else if ($(element).parent().is(":nth-child(4)")) {
+            else if ($(element).is(":nth-child(7)")) {
                 console.log("FOURTH TAB CLICKED");
-                console.log(tagObject);
-                tagObject.forEach(function(element) {
-                    console.log(element.name);
-                    $("main .content").append($("<h1>").text(element.name));
-                    var $newUl = $("<ul>");
-                    element.toDos.forEach(function(todo) {
-                        $newUl.append($("<li>").text(todo));
-                    });
-                    $("main .content").append($newUl);
+                // console.log(tagObject);
+                // tagObject.forEach(function(element) {
+                //     console.log(element.name);
+                //     $("main .content").append($("<h1>").text(element.name));
+                //     var $newUl = $("<ul>");
+                //     element.toDos.forEach(function(todo) {
+                //         $newUl.append($("<li>").text(todo));
+                //     });
+                //     $("main .content").append($newUl);
+                // });
+            }
+            if ($(element).is(":nth-child(9)")) {
+                console.log("FIFTH TAB CLICKED!");
+
+                $.get("/completed", {}, function(response) {
+                    if (response["status"] == "success") {
+                        for (let i=response["message"].length-1; i>=0; i--) {
+                            var taskDiv = $("<div>");
+                            taskDiv.attr("id", "task");
+                            taskDiv.text(response["message"][i]["taskDesc"]);
+                            
+                            var delBtn = $("<button>");
+                            delBtn.attr("id", "delBtn");
+                            delBtn.attr("title", "Delete Task");
+                            delBtn.append("&#10539;");
+
+                            delBtn.on("click", () => {
+                                $.post("/delTask", {taskId: response["message"][i]["taskID"]}, (res) => {
+                                    console.log(res["status"]);
+                                    if (res['status'] == 'success') {
+                                        $(".completed").trigger("click");
+                                    }
+                                    else {
+
+                                    }
+                                });
+                            });
+
+                            var cmpBtn = $("<button>");
+                            cmpBtn.attr("id", "cmpltBtn");
+                            cmpBtn.attr("title", "Mark Uncomplete");
+                            cmpBtn.append("&Oslash;");
+
+                            cmpBtn.on("click", () => {
+                                $.post("/uncmpTask", {taskId: response["message"][i]["taskID"]}, (res) => {
+                                    if (res['status'] == 'success') {
+                                        $(".completed").trigger("click");
+                                    }
+                                    else {
+                                        
+                                    }
+                                });
+                            });
+
+                            taskDiv.append(delBtn);
+                            taskDiv.append(cmpBtn);
+
+                            $("main .content").append(taskDiv);
+                        }
+                    }
                 });
             }
             return false;
         });
     });
-
-    $(".tabs a:first-child span").trigger("click");
 };
 
 $(document).ready(main);
