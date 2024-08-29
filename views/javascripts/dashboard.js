@@ -2,10 +2,9 @@ var main = function() {
     "use strict";
 
     $.get("/user", {}, function(response) {
-        console.log(response);
         if (response["status"] == "success") {}
         else {
-            location.replace("http://localhost:4000/views/register.html");
+            location.replace("https://localhost:4000/views/register.html");
         }
     });
 
@@ -29,8 +28,10 @@ var main = function() {
                                 continue;
                             }
 
+                            var className = "task" + i;
                             var taskDiv = $("<div>");
                             taskDiv.attr("id", "task");
+                            taskDiv.addClass("task"+i);
                             taskDiv.text(response["message"][i]["taskDesc"]);
                             
                             var delBtn = $("<button>");
@@ -40,9 +41,9 @@ var main = function() {
 
                             delBtn.on("click", () => {
                                 $.post("/delTask", {taskId: response["message"][i]["taskID"]}, (res) => {
-                                    console.log(res["status"]);
                                     if (res['status'] == 'success') {
-                                        $(".newest").trigger("click");
+                                        className = ".task" + i;
+                                        $(className).remove();
                                     }
                                     else {
 
@@ -58,10 +59,11 @@ var main = function() {
                             cmpBtn.on("click", () => {
                                 $.post("/cmpTask", {taskId: response["message"][i]["taskID"]}, (res) => {
                                     if (res['status'] == 'success') {
-                                        $(".newest").trigger("click");
+                                        className = ".task" + i;
+                                        $(className).remove();
                                     }
                                     else {
-                                        
+                                        console.log(res['status']);
                                     }
                                 });
                             });
@@ -84,23 +86,24 @@ var main = function() {
                                 continue;
                             }
 
+                            var className = "task" + i;
                             var taskDiv = $("<div>");
                             taskDiv.attr("id", "task");
+                            taskDiv.addClass(className);
                             taskDiv.text(response["message"][i]["taskDesc"]);
                             
                             var delBtn = $("<button>");
                             delBtn.attr("id", "delBtn");
                             delBtn.attr("title", "Delete Task");
                             delBtn.append("&#10539;");
-
                             delBtn.on("click", () => {
                                 $.post("/delTask", {taskId: response["message"][i]["taskID"]}, (res) => {
-                                    console.log(res["status"]);
                                     if (res['status'] == 'success') {
-                                        $(".oldest").trigger("click");
+                                        className = ".task" + i;
+                                        $(className).remove();
                                     }
                                     else {
-
+                                        console.log(res['message']);
                                     }
                                 });
                             });
@@ -113,10 +116,12 @@ var main = function() {
                             cmpBtn.on("click", () => {
                                 $.post("/cmpTask", {taskId: response["message"][i]["taskID"]}, (res) => {
                                     if (res['status'] == 'success') {
-                                        $(".oldest").trigger("click");
+                                        console.log(className);
+                                        className = ".task" + i;
+                                        $(className).remove();
                                     }
                                     else {
-                                        
+                                        console.log(res['message']);
                                     }
                                 });
                             });
@@ -171,20 +176,22 @@ var main = function() {
                 $.get("/completed", {}, function(response) {
                     if (response["status"] == "success") {
                         for (let i=response["message"].length-1; i>=0; i--) {
+                            let className = "task" + i;
                             var taskDiv = $("<div>");
                             taskDiv.attr("id", "task");
+                            taskDiv.addClass(className);
                             taskDiv.text(response["message"][i]["taskDesc"]);
                             
                             var delBtn = $("<button>");
                             delBtn.attr("id", "delBtn");
                             delBtn.attr("title", "Delete Task");
                             delBtn.append("&#10539;");
-
                             delBtn.on("click", () => {
                                 $.post("/delTask", {taskId: response["message"][i]["taskID"]}, (res) => {
                                     console.log(res["status"]);
                                     if (res['status'] == 'success') {
-                                        $(".completed").trigger("click");
+                                        className = ".task" + i;
+                                        $(className).remove();
                                     }
                                     else {
 
@@ -200,10 +207,11 @@ var main = function() {
                             cmpBtn.on("click", () => {
                                 $.post("/uncmpTask", {taskId: response["message"][i]["taskID"]}, (res) => {
                                     if (res['status'] == 'success') {
-                                        $(".completed").trigger("click");
+                                        className = ".task" + i;
+                                        $(className).remove();
                                     }
                                     else {
-                                        
+                                        console.log(res['status']);
                                     }
                                 });
                             });
