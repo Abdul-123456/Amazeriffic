@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require('express-session');
 const mysql = require('mysql');
 const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
@@ -191,6 +192,19 @@ app.post("/delTask", Verify, async (req, res) => {
     }
 });
 
+app.post("/logout", Verify, async (req, res) => {
+    const cookie = req.headers["cookie"].split("=")[1];
+    var str = "INSERT INTO blacklist VALUES (\'" + cookie + "\');";
+    try {
+        result = await selectQueryPromise(str);
+        res.setHeader('Clear-Site-Data', 'cookies');
+        res.redirect("/");
+    } catch (e) {
+        console.log(e);
+        res.json({status:"failure", message: "An Error Occurred. Please Try Again!"});
+    }
+});
+
 app.post("/uncmpTask", Verify, async (req, res) => {
     let tskId = req.body['taskId'];
     let str = "UPDATE tasks SET completed = 0 WHERE userID = \'" + req.user['ID'] + "\' AND taskID = \'" + tskId + "\';";
@@ -205,11 +219,21 @@ app.post("/uncmpTask", Verify, async (req, res) => {
 
 async function Verify (req, res, next) {
     const authHeader = req.headers["cookie"];
+
     if (!authHeader) {
         return res.json({status: "failure", message: "Please login to perform the action!"});
     }
     const cookie = authHeader.split("=")[1];
-
+    try {
+        var str = "SELECT * FROM blacklist WHERE token = \'" + cookie + "\';";
+        blacklist = await selectQueryPromise(str);
+       if (blacklist.length != 0) {
+            return res.json({status: "failure", message: "Please Login to Perform the Action!"});
+        }
+    } catch(e) {
+        console.log(e);
+        res.json({status: "failure", message: "An error occured please try again"});
+    }
     try {
         const resultElements = await jwtVerifyPromise(cookie, process.env.ACCESS_TOKEN);
 

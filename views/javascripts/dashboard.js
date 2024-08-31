@@ -4,9 +4,28 @@ var main = function() {
     $.get("/user", {}, function(response) {
         if (response["status"] == "success") {}
         else {
-            location.replace("https://localhost:4000/views/register.html");
+            console.log("hello");
+            location.replace("http://localhost:4000/views/register.html");
         }
     });
+
+    var setNotificationBar = (boolean, message) => {
+        $(".notificationBar").empty();
+        $(".notificationBar").append(message);
+        
+        if (boolean == 1) {
+            $(".notificationBar").css("color", "green");
+            $(".notificationBar").css("display", "block");
+        }
+        else {
+            $(".notificationBar").css("color", "red");
+            $(".notificationBar").css("display", "block"); 
+        }
+        
+        setTimeout(() => {
+            $(".notificationBar").css("display", "none");
+        }, 5000);
+    }
 
     $(".logout").on("click", () => {
         $.post("/logout", {});
@@ -44,9 +63,11 @@ var main = function() {
                                     if (res['status'] == 'success') {
                                         className = ".task" + i;
                                         $(className).remove();
+                                        setNotificationBar(1, "Task Deleted");
                                     }
                                     else {
-
+                                        console.log(response['message']);
+                                        setNotificationBar(0, "Couldn\'t Delete Task. Please Try Again!");
                                     }
                                 });
                             });
@@ -61,9 +82,11 @@ var main = function() {
                                     if (res['status'] == 'success') {
                                         className = ".task" + i;
                                         $(className).remove();
+                                        setNotificationBar(1, "Task Marked Complete!");
                                     }
                                     else {
-                                        console.log(res['status']);
+                                        console.log(res['message']);
+                                        setNotificationBar(0, "Couldn\'t Complete Task. Please Try Again!");
                                     }
                                 });
                             });
@@ -73,6 +96,10 @@ var main = function() {
 
                             $("main .content").append(taskDiv);
                         }
+                    }
+                    else {
+                        console.log(response['message']);
+                        setNotificationBar(0, "An Error Occurred. Please Try Again!");
                     }
                 });
             }
@@ -101,9 +128,11 @@ var main = function() {
                                     if (res['status'] == 'success') {
                                         className = ".task" + i;
                                         $(className).remove();
+                                        setNotificationBar(1, "Task Deleted");
                                     }
                                     else {
                                         console.log(res['message']);
+                                        setNotificationBar(0, "Couldn\'t Delete Task. Please Try Again!");
                                     }
                                 });
                             });
@@ -116,12 +145,13 @@ var main = function() {
                             cmpBtn.on("click", () => {
                                 $.post("/cmpTask", {taskId: response["message"][i]["taskID"]}, (res) => {
                                     if (res['status'] == 'success') {
-                                        console.log(className);
                                         className = ".task" + i;
                                         $(className).remove();
+                                        setNotificationBar(1, "Task Marked Complete!");
                                     }
                                     else {
                                         console.log(res['message']);
+                                        setNotificationBar(0, "Couldn\'t Complete Task. Please Try Again!");
                                     }
                                 });
                             });
@@ -131,6 +161,10 @@ var main = function() {
 
                             $("main .content").append(taskDiv);
                         }
+                    }
+                    else {
+                        console.log(response['message']);
+                        setNotificationBar(0, "An Error Occurred. Please Try Again!");
                     }
                 });
             }
@@ -148,7 +182,7 @@ var main = function() {
                     $.post("/addTask", {task: taskInput}, (response) => {
                         if (response['status'] == 'success') {}
                         else {
-                            location.replace("http://localhost:4000/views/register.html") 
+                            location.replace("https://localhost:4000/views/register.html") 
                         }
                     });
                     
@@ -159,18 +193,8 @@ var main = function() {
             }
             else if ($(element).is(":nth-child(7)")) {
                 console.log("FOURTH TAB CLICKED");
-                // console.log(tagObject);
-                // tagObject.forEach(function(element) {
-                //     console.log(element.name);
-                //     $("main .content").append($("<h1>").text(element.name));
-                //     var $newUl = $("<ul>");
-                //     element.toDos.forEach(function(todo) {
-                //         $newUl.append($("<li>").text(todo));
-                //     });
-                //     $("main .content").append($newUl);
-                // });
             }
-            if ($(element).is(":nth-child(9)")) {
+            else if ($(element).is(":nth-child(9)")) {
                 console.log("FIFTH TAB CLICKED!");
 
                 $.get("/completed", {}, function(response) {
@@ -188,20 +212,21 @@ var main = function() {
                             delBtn.append("&#10539;");
                             delBtn.on("click", () => {
                                 $.post("/delTask", {taskId: response["message"][i]["taskID"]}, (res) => {
-                                    console.log(res["status"]);
                                     if (res['status'] == 'success') {
                                         className = ".task" + i;
                                         $(className).remove();
+                                        setNotificationBar(1, "Task Deleted");
                                     }
                                     else {
-
+                                        console.log(res['message']);
+                                        setNotificationBar(0, "Couldn\'t Delete Task. Please Try Again!");
                                     }
                                 });
                             });
 
                             var cmpBtn = $("<button>");
                             cmpBtn.attr("id", "cmpltBtn");
-                            cmpBtn.attr("title", "Mark Uncomplete");
+                            cmpBtn.attr("title", "Mark Incomplete");
                             cmpBtn.append("&Oslash;");
 
                             cmpBtn.on("click", () => {
@@ -209,9 +234,11 @@ var main = function() {
                                     if (res['status'] == 'success') {
                                         className = ".task" + i;
                                         $(className).remove();
+                                        setNotificationBar(1, "Task Marked Incomplete!");
                                     }
                                     else {
-                                        console.log(res['status']);
+                                        console.log(res['message']);
+                                        setNotificationBar(0, "Couldn\'t Perform the Action. Please Try Again!");
                                     }
                                 });
                             });
@@ -221,6 +248,10 @@ var main = function() {
 
                             $("main .content").append(taskDiv);
                         }
+                    }
+                    else {
+                        console.log(response['message']);
+                        setNotificationBar(0, "An Error Occurred. Please Try Again!");
                     }
                 });
             }

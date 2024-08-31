@@ -17,6 +17,15 @@ header {
     overflow: auto;
 }
 
+.notificationBar {
+    background: rgb(163, 163, 163);
+    padding: 10px;
+    border-radius: 10px;
+    position: fixed;
+    display: none;
+    margin-left: 45%;
+}
+
 header h1 {
     font-size: 35px;
     float: left;
