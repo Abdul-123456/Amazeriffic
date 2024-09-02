@@ -4,7 +4,6 @@ var main = function() {
     $.get("/user", {}, function(response) {
         if (response["status"] == "success") {}
         else {
-            console.log("hello");
             location.replace("http://localhost:4000/views/register.html");
         }
     });
@@ -191,9 +190,9 @@ var main = function() {
 
                 $("main .content").append($add).append($input).append($button);
             }
-            else if ($(element).is(":nth-child(7)")) {
-                console.log("FOURTH TAB CLICKED");
-            }
+            // else if ($(element).is(":nth-child(7)")) {
+            //     console.log("FOURTH TAB CLICKED");
+            // }
             else if ($(element).is(":nth-child(9)")) {
                 console.log("FIFTH TAB CLICKED!");
 

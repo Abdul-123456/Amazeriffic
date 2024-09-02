@@ -10,20 +10,12 @@ const PORT  = process.env.PORT || 4000;
 
 dotenv.config({path: './.env'});
 
-db = mysql.createConnection({
+db = mysql.createPool({
+    connectionLimit: 10,
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE
-});
-
-db.connect((error) => {
-    if (error) {
-        console.log(error);
-    }
-    else {
-        console.log("MySQL Connected!");
-    }
 });
 
 selectQueryPromise = (query) => {
@@ -107,7 +99,7 @@ app.post("/addTask", Verify, async (req, res) => {
 });
 
 app.post("/auth/register", async (req, res) => {
-    const {name, email, password, password_confirm} = req.body;
+    const {first_name, last_name, email, password} = req.body;
     let str = 'SELECT email FROM users WHERE email = \'' + email + "\';";
     try {
         const result = await selectQueryPromise(str);
@@ -115,14 +107,9 @@ app.post("/auth/register", async (req, res) => {
         if (result.length > 0) {
             return res.json({status: "failure", message: 'This email is already in use'});
         }
-        else if (password !== password_confirm) {
-            console.log("password: " + password);
-            console.log("password_confirm: " + password_confirm);
-            return res.json({status: 'failure', message: 'Passwords do not match!'});
-        }
         else {
             let hashedPassword = await bcrypt.hash(password, 8);
-            str = 'INSERT INTO users (name, email, password) VALUES (\'' + name + '\',\'' + email + '\',\'' + hashedPassword + '\');';
+            str = 'INSERT INTO users (firstName, lastName, email, password) VALUES (\'' + first_name + '\',\'' + last_name + '\',\'' + email + '\',\'' + hashedPassword + '\');';
             try {
                 const resultElements = await selectQueryPromise(str);
                 res.json({status: "success", message: resultElements});
@@ -144,6 +131,10 @@ app.post("/auth/login", async (req, res) => {
     try {
         const result = await selectQueryPromise(str);
 
+        if (result.length == 0) {
+            return res.json({status: 'failure', message: "Invalid email or password"});
+        }
+
         const comparePassword = await bcrypt.compare(password, result[0].password);
         if (!comparePassword) {
             return res.json({status: 'failure', message: "Invalid email or password"});
@@ -158,9 +149,8 @@ app.post("/auth/login", async (req, res) => {
                 secure: true,
                 sameSite: "None",
             };
-
             res.cookie('SessionID', token, options);
-            res.redirect("/");
+            res.json({status: 'success', message: ""});
         }
     } catch(e) {
         console.log(e);

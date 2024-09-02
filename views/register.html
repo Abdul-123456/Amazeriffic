@@ -9,15 +9,22 @@
         <div class="card-body">
             <h1>Sign Up to Get Started</h1>
             <div class="header2">Already have an account? <a class ="signLink" href="login.html">Login</a></div>
-            <form action="/auth/register" method="POST">
-                <label for="email-reg" class="form-label">Email</label><br>
-                <input type="text" class="form-control" id="email-reg" name="email" autofocus><br>
-                <label for="password-reg" class="form-label">Password</label><br>
-                <input type="password" class="form-control" id="password-reg" name="password"><br>
-                <label for="confirm-password" class="form-label">Confirm Password</label><br>
-                <input type="password" class="form-control" id="confirm-password" name="password"><br>
+            <form class="form">
+                <label class="notificationBar"></label><br>
+                <label for="first_name" class="fnLabel">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="first_name" autofocus><br>
+                <label for="last_name" class="lnLabel">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="last_name"><br>
+                <label for="email-reg" class="eLabel">Email</label><br>
+                <input type="text" class="form-control" id="emailReg" name="email-reg"><br>
+                <label for="password-reg" class="pLabel">Password</label><br>
+                <input type="password" class="form-control" id="passwordReg" name="password-reg"><br>
+                <label for="password_confirm" class="cpLabel">Confirm Password</label><br>
+                <input type="password" class="form-control" id="passwordCon" name="password_confirm"><br>
                 <button type="submit" class="btn"><b>Sign Up</b></button>
             </form>
         </div>
+        <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="javascripts/register.js"></script>
     </body>
 </html>
