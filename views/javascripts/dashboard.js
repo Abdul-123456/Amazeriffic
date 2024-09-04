@@ -1,12 +1,16 @@
 var main = function() {
     "use strict";
 
-    $.get("/user", {}, function(response) {
-        if (response["status"] == "success") {}
-        else {
-            location.replace("http://localhost:4000/views/register.html");
-        }
-    });
+    function checkLogin() {
+        $.get("/user", {}, (response) => {
+            if (response["status"] != "success") {
+                location.replace("http://localhost:4000/views/register.html");
+            }
+            else {
+                console.log("logged in!");
+            }
+        });
+    }
 
     var setNotificationBar = (boolean, message) => {
         $(".notificationBar").empty();
@@ -26,6 +30,9 @@ var main = function() {
         }, 5000);
     }
 
+    checkLogin();
+    setInterval(checkLogin, 10000);
+
     $(".logout").on("click", () => {
         $.post("/logout", {});
     });
@@ -36,7 +43,7 @@ var main = function() {
             $(element).addClass("active");
             $("main .content").empty();
 
-            if ($(element).is(":nth-child(1)")) {
+            if ($(element).attr("class")[0] == 'n') {
                 console.log("FIRST TAB CLICKED!");
 
                 $.get("/tasks", {}, function(response) {
@@ -102,7 +109,7 @@ var main = function() {
                     }
                 });
             }
-            else if ($(element).is(":nth-child(3)")) {
+            else if ($(element).attr("class")[0] == 'o') {
                 console.log("SECOND TAB CLICKED!");
                 
                 $.get("/tasks", {}, function(response) {
@@ -167,7 +174,7 @@ var main = function() {
                     }
                 });
             }
-            else if ($(element).is(":nth-child(5)")) {
+            else if ($(element).attr("class")[0] == 'a') {
                 var $input = $("<input>");
                 var $add = $("<p>");
                 $add.text("Add Task:");
@@ -179,21 +186,19 @@ var main = function() {
                     let taskInput = $input.val();
                     
                     $.post("/addTask", {task: taskInput}, (response) => {
-                        if (response['status'] == 'success') {}
+                        if (response['status'] == 'success') {
+                            $input.val("");
+                            setNotificationBar(1, "Task Added!");
+                        }
                         else {
-                            location.replace("https://localhost:4000/views/register.html") 
+                            setNotificationBar(0, "Couldn't Add Task. Please Try Again!");
                         }
                     });
-                    
-                    $input.val("");
                 });
 
                 $("main .content").append($add).append($input).append($button);
             }
-            // else if ($(element).is(":nth-child(7)")) {
-            //     console.log("FOURTH TAB CLICKED");
-            // }
-            else if ($(element).is(":nth-child(9)")) {
+            else if ($(element).attr("class")[0] == 'c') {
                 console.log("FIFTH TAB CLICKED!");
 
                 $.get("/completed", {}, function(response) {
@@ -224,7 +229,7 @@ var main = function() {
                             });
 
                             var cmpBtn = $("<button>");
-                            cmpBtn.attr("id", "cmpltBtn");
+                            cmpBtn.attr("id", "incmpltBtn");
                             cmpBtn.attr("title", "Mark Incomplete");
                             cmpBtn.append("&Oslash;");
 

@@ -63,7 +63,7 @@ main {
     margin: auto;
     /* border: white solid 1px; */
     color: white;
-    font-size: 80px;
+    font-size: 5vw;
 }
 
 .header2 {
@@ -73,7 +73,7 @@ main {
     margin: auto;
     /* border: white solid 1px; */
     color: white;
-    font-size: 80px;
+    font-size: 4vw;
 }
 
 .header3 {
@@ -82,5 +82,5 @@ main {
     text-align: center;
     margin: auto;
     color: white;
-    font-size: 35px;
+    font-size: 3vw;
 }

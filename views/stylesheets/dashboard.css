@@ -8,37 +8,25 @@ body {
 }
 
 header {
-    font-family: sans-serif;
     padding: 10px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    font-family: sans-serif;
     border-bottom: rgb(124, 124, 124) solid 1px;
     margin: auto;
+    margin-bottom: 2px;
     overflow: auto;
 }
 
-.notificationBar {
-    background: rgb(163, 163, 163);
-    padding: 10px;
-    border-radius: 10px;
-    position: fixed;
-    display: none;
-    margin-left: 45%;
-}
-
 header h1 {
-    font-size: 35px;
     float: left;
 }
 
 header nav {
-    margin-top: 10px;
+    margin-top: 5px;
     float: right;
 }
 
 header nav a {
-    margin-right: 50px;
-    font-size: 20px;
+    margin-right: 25px;
     text-decoration: none;
     color: black;
 }
@@ -49,145 +37,170 @@ header nav a:hover {
 }
 
 main {
-    padding: 10px;
     min-height: 100vh;
 }
 
-.tabs {
-    float: left;
-    width: 12%;
+main .content {
     min-height: 95vh;
-    padding-top: 45px;
-    padding-left: 4px;
-    /* padding-right: 15px; */
-    border-radius: 10px;
     background: rgb(163, 163, 163);
 }
-
-.tabs a {
-    width: 89%;
-    margin-bottom: 10px;
-    display: inline-block;
-    padding: 5px;
-    text-decoration: none;
-    font-family: sans-serif;
-    color: black;
-}
-
-.tabs .active {
-    border: 1px solid rgb(151, 151, 151);
-    border-radius: 5px;
-    background: rgb(151, 151, 151);
-}
-
-main .content {
-    float: right;
-    width: 86%;
-    min-height: 95vh;
-    padding-top: 45px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 10px;
-    background: rgb(163, 163, 163);
-}
-
-/* main {
-    background: white;
-    margin : auto;
-    overflow: auto;
-}
-
-main .content {
-    background: #eee;
-    padding: 10px;
-}*/
 
 main .content #task {
-    padding: 10px;
     background-color: rgb(151, 151, 151);
     border-radius: 5px;
-    margin-bottom: 5px;
 }
 
-main .content #task #delBtn {
+main .content #task #delBtn,  main .content #task #cmpltBtn, main .content #task #incmpltBtn {
     background: black;
     color: white;
     float: right;
     border-radius: 50%;
-    margin-left: 5px;
+    border-style: none;
+    cursor: pointer;
 }
 
-main .content #task #cmpltBtn {
-    font-size: 11px;
-    background: black;
-    color: white;
-    float: right;
-    border-radius: 50%;
+@media only screen and (max-width: 1200px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    header nav a {
+        font-size: 25px;
+    }
+
+    #desktop {
+        display: none;
+    }
+
+    #mobile {
+        background: rgb(163, 163, 163);
+        width: 100%;
+        text-align: center;
+        margin: auto;
+        overflow: hidden;
+        height: 35px;
+    }
+
+    #mobile a {
+        display: inline-block;
+        text-decoration: none;
+        font-family: sans-serif;
+        color: black;
+        /* border: 1px solid black; */
+        height: 100%;
+        margin-right: 10px;
+        padding: 5px;
+        font-size: 25px;
+    }
+
+    #mobile .active {
+        border: 1px solid rgb(151, 151, 151);
+        background: rgb(151, 151, 151);
+    }
+
+    main {
+        padding-top: 3px;
+    }
+
+    main .content {
+        padding: 5px;
+    }
+
+    main .content #task {
+        font-size: 35px;
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+
+    main .content #task #delBtn {
+        font-size: 23px;
+        margin-left: 8px;
+    }
+    
+    main .content #task #cmpltBtn {
+        font-size: 21px;
+    }
+
+    main .content #task #incmpltBtn {
+        font-size: 23.5px;
+    }
 }
 
-/*header {
-    background: white;
-    overflow: auto;
+@media only screen and (min-width: 1200px) {
+    header h1 {
+        font-size: 35px;
+    }
+    
+    header nav a {
+        font-size: 30px;
+    }
+
+    #mobile {
+        display: none;
+    }
+
+    #desktop {
+        padding: 15px;
+        float: left;
+        min-height: 95vh;
+        border-radius: 10px;
+        background: rgb(163, 163, 163);
+        font-size: 20px;
+        width: 10vw;
+    }
+    
+    #desktop a {
+        padding: 8px;
+        margin-bottom: 10px;
+        display: inline-block;
+        text-decoration: none;
+        font-family: sans-serif;
+        color: black;
+        border-radius: 5px;
+    }
+    
+    #desktop .active, #desktop a:hover {
+        background: rgb(151, 151, 151);
+    }
+
+    main {
+        padding: 5px;
+        padding-top: 10px;
+    }
+
+    main .content {
+        padding: 15px;
+        float: right;        
+        border-radius: 10px;
+        font-size: 20px;
+        width: 82vw;
+    }
+
+    main .content #task {
+        padding: 8px;
+        margin-bottom: 5px;
+        font-family: sans-serif;
+    }
+
+    main .content #task #delBtn {
+        font-size: 15px;
+        margin-left: 8px;
+    }
+    
+    main .content #task #cmpltBtn {
+        font-size: 13px;
+    }
+
+    main .content #task #incmpltBtn {
+        font-size: 15.5px;
+    }
 }
 
-header, main, footer {
-    min-width: 855px;
+.notificationBar {
+    background: rgb(163, 163, 163);
+    padding: 10px;
+    border-radius: 10px;
+    position: fixed;
+    display: none;
+    margin-left: 45%;
 }
-
-header .container, main .container, footer .container {
-    max-width: 855px;
-    margin: auto;
-}
-
-header .container {
-    border-bottom: 1px solid #eee;
-    padding-top: 30px;
-    padding-bottom: 70px;
-    margin-bottom: 10px;
-}
-
-header h1 {
-    font-size: 50px;
-    font-style: italic;
-    float: left;
-    width: 570px;
-    color: red;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-header nav {
-    float: right;
-    width: 285px;
-}
-
-header nav a {
-    color: red;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-decoration: none;
-}
-
-.contact {
-    float: left;
-    width: 425px;
-}
-
-.sitemap {
-    float: right;
-    width: 425px;
-}
-
-.tabs a span {
-    display: inline-block;
-    width: 100px;
-    text-align: center;
-    border-radius: 5px 5px 0 0;
-    background: #ddd;
-    padding: 5px;
-    margin-right: 10px;
-    color: red;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.tabs a span.active {
-    background: #eee;
-} */
