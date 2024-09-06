@@ -36,15 +36,17 @@ header div nav {
 }
 
 header div nav a {
-    background: rgb(151, 150, 150);
-    color: white;
+    background: black;
+    color: rgb(151, 150, 150);
     display: inline-block;
     border-radius: 15px;
+    border: 3px solid black;
     padding: 5px;
     text-decoration: none;
 }
 
 header div nav a:hover {
+    border: 3px solid green;
     transition-duration: 500ms;
     color: white;
 }
@@ -64,19 +66,19 @@ main .container {
     text-align: center;
     color: white;
     margin-top: 30vh;
-    font-size: 5vw;
+    font-size: 9vw;
 }
 
 .p2 {
     text-align: center;
     color: white;
-    margin-top: 1.5vh;
-    font-size: 3vw;
+    margin-top: 3vh;
+    font-size: 6vw;
 }
 
 .p3 {
     text-align: center;
     color: white;
-    margin-top: 1.8vh;
-    font-size: 2vw;
+    margin-top: 2vh;
+    font-size: 3vw;
 }
