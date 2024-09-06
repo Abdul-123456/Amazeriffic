@@ -4,7 +4,7 @@ var main = function() {
     function checkLogin() {
         $.get("/user", {}, (response) => {
             if (response["status"] != "success") {
-                location.replace("http://localhost:4000/views/register.html");
+                location.replace("https://amazeriffic.co/views/register.html");
             }
             else {
                 console.log("logged in!");

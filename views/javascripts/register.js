@@ -106,7 +106,7 @@ var main = function() {
                                 },
                                 (response) => {
                                     if (response['status'] == 'success') {
-                                        location.replace('http://localhost:4000/views/login.html');
+                                        location.replace('https://amazeriffic.co/views/login.html');
                                     }
                                     else if (response['message'] == 'This email is already in use') {
                                         $("#passwordReg").val("");

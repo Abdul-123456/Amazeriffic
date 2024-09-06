@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Amazeriffic</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="stylesheets/reset.css" rel="stylesheet" type="text/css">
         <link href="stylesheets/dashboard.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
@@ -12,20 +13,21 @@
             <div class="container">
                 <div class="notificationBar"></div>
                 <h1>Amazeriffic!</h1>
-                <nav>
-                    <a href='' class="logout">Logout</a>
-                    <!-- <a href="register.html">Sign Up!</a>  -->
-                    <!-- <a href="#">FAQ</a>
-                    <a href="#">Support</a> -->
+                <a href='' class="logout">Logout</a>
+                <nav class="tabs" id="mobile">
+                    <a href="" class="newest">Newest</a>
+                    <a href="" class="oldest"><span>Oldest</span></a>
+                    <a href="" class="add"><span>Add</span></a>
+                    <a href="" class="completed"><span>Completed</span></a>
                 </nav>
             </div>
         </header>
-        <div class="tabs" id="mobile">
+        <!-- <div class="tabs" id="mobile">
             <a href="" class="newest">Newest</a>
             <a href="" class="oldest"><span>Oldest</span></a>
             <a href="" class="add"><span>Add</span></a>
             <a href="" class="completed"><span>Completed</span></a>
-        </div>
+        </div> -->
         <main>
             <div class="container">
                 <div class="tabs" id="desktop">

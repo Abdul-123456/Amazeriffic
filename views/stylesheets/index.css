@@ -1,86 +1,82 @@
+html {
+    height: 100%;
+}
+
 body {
+    font-family: Verdana, sans-serif;
     background: black;
 }
 
 header {
-    padding: 10px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-bottom: rgb(124, 124, 124) solid 1px;
+    font-family: Verdana, sans-serif;
     overflow: auto;
     margin: auto;
+    position: fixed;
+    width: 100%;
 }
 
 header div {
-    font-family: sans-serif;
+    padding: 10px;
+    font-family: Verdana, sans-serif;
     color: white;
-    font-size: 35px;
+    font-size: 15px;
+    height: 30px;
+    border-bottom: 2px solid white;
 }
 
-header nav {
+header div h1 {
+    margin-top: 3.5px;
+    float: left;
+    font-size: 19px;
+}
+
+header div nav {
+    font-size: 15px;
     float: right;
 }
 
-header nav a {
-    margin-right: 50px;
-    font-size: 20px;
+header div nav a {
+    background: rgb(151, 150, 150);
+    color: white;
+    display: inline-block;
+    border-radius: 15px;
+    padding: 5px;
     text-decoration: none;
-    color: rgb(151, 150, 150);
 }
 
-header nav a:hover {
+header div nav a:hover {
     transition-duration: 500ms;
     color: white;
 }
 
-header nav a:nth-child(3) {
-    display: none;
-    border-radius: 50%;
-    padding: 10px;
-    background: rgb(184, 73, 184);
-    color: white;
-    /* display: none; */
-}
-
-header nav a:nth-child(4) {
-    display: none;
-    color: black;
-    padding: 10px;
-    background: white;
-    border-radius: 5px;
-    /* border: white solid 5px; */
-}
-
 main {
-    overflow: hidden;
+    font-family: Verdana, sans-serif;
+    overflow: auto;
     margin: auto;
 }
 
-.header {
-    width: 50%;
-    padding-top: 12.5%;
+main .container {
+    margin-top: 55px;
+    height: 80vh;
+}
+
+.p1 {
     text-align: center;
-    margin: auto;
-    /* border: white solid 1px; */
     color: white;
+    margin-top: 30vh;
     font-size: 5vw;
 }
 
-.header2 {
-    width: 50%;
-    /* padding-top: 12.5%; */
+.p2 {
     text-align: center;
-    margin: auto;
-    /* border: white solid 1px; */
     color: white;
-    font-size: 4vw;
+    margin-top: 1.5vh;
+    font-size: 3vw;
 }
 
-.header3 {
-    width: 50%;
-    padding-top: 2.5%;
+.p3 {
     text-align: center;
-    margin: auto;
     color: white;
-    font-size: 3vw;
+    margin-top: 1.8vh;
+    font-size: 2vw;
 }

@@ -2,27 +2,31 @@
 <html>
     <head>
         <link href="stylesheets/auth.css" rel="stylesheet" type="text/css">
+        <link href="stylesheets/reset.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sign Up Amazeriffic</title>
     </head>
     <body>
         <div class="card-body">
-            <h1>Sign Up to Get Started</h1>
-            <div class="header2">Already have an account? <a class ="signLink" href="login.html">Login</a></div>
-            <form class="form">
-                <label class="notificationBar"></label><br>
-                <label for="first_name" class="fnLabel">First Name</label><br>
-                <input type="text" class="form-control" id="firstName" name="first_name" autofocus><br>
-                <label for="last_name" class="lnLabel">Last Name</label><br>
-                <input type="text" class="form-control" id="lastName" name="last_name"><br>
-                <label for="email-reg" class="eLabel">Email</label><br>
-                <input type="text" class="form-control" id="emailReg" name="email-reg"><br>
-                <label for="password-reg" class="pLabel">Password</label><br>
-                <input type="password" class="form-control" id="passwordReg" name="password-reg"><br>
-                <label for="password_confirm" class="cpLabel">Confirm Password</label><br>
-                <input type="password" class="form-control" id="passwordCon" name="password_confirm"><br>
-                <button type="submit" class="btn"><b>Sign Up</b></button>
-            </form>
+            <div class="content">
+                <h1>Sign Up to Get Started</h1>
+                <div class="header2">Already have an account? <a class ="signLink" href="login.html">Login</a></div>
+                <form class="form">
+                    <label class="notificationBar"></label><br>
+                    <label for="first_name" class="fnLabel">First Name</label><br>
+                    <input type="text" class="form-control" id="firstName" name="first_name" autofocus><br>
+                    <label for="last_name" class="lnLabel">Last Name</label><br>
+                    <input type="text" class="form-control" id="lastName" name="last_name"><br>
+                    <label for="email-reg" class="eLabel">Email</label><br>
+                    <input type="text" class="form-control" id="emailReg" name="email-reg"><br>
+                    <label for="password-reg" class="pLabel">Password</label><br>
+                    <input type="password" class="form-control" id="passwordReg" name="password-reg"><br>
+                    <label for="password_confirm" class="cpLabel">Confirm Password</label><br>
+                    <input type="password" class="form-control" id="passwordCon" name="password_confirm"><br>
+                    <button type="submit" class="btn"><b>Sign Up</b></button>
+                </form>
+            </div>
         </div>
         <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
         <script src="javascripts/register.js"></script>

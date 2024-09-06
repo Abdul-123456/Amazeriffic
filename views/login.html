@@ -2,21 +2,25 @@
 <html>
     <head>
         <link href="stylesheets/auth.css" rel="stylesheet" type="text/css">
+        <link href="stylesheets/reset.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Login Amazeriffic</title>
     </head>
     <body>
         <div class="card-body">
-            <h1>Login to Get Started</h1>
-            <div class="header2">Don't have an account? <a class ="signLink" href="register.html">Sign Up</a></div>
-            <form class="form">
-                <label class="notificationBar"></label><br>
-                <label for="email-reg" class="eLabel">Email</label><br>
-                <input type="text" class="form-control" id="emailReg" name="email-reg" autofocus><br>
-                <label for="password-reg" class="pLabel">Password</label><br>
-                <input type="password" class="form-control" id="passwordReg" name="password-reg"><br>
-                <button type="submit" class="btn"><b>Login</b></button>
-            </form>
+            <div class="content">
+                <h1>Login to Get Started</h1>
+                <div class="header2">Don't have an account? <a class ="signLink" href="register.html">Sign Up</a></div>
+                <form class="form">
+                    <label class="notificationBar"></label><br>
+                    <label for="email-reg" class="eLabel">Email</label><br>
+                    <input type="text" class="form-control" id="emailReg" name="email-reg" autofocus><br>
+                    <label for="password-reg" class="pLabel">Password</label><br>
+                    <input type="password" class="form-control" id="passwordReg" name="password-reg"><br>
+                    <button type="submit" class="btn"><b>Login</b></button>
+                </form>
+            </div>
         </div>
         <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
         <script src="javascripts/login.js"></script>
